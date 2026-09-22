@@ -121,7 +121,7 @@ canvas_handler.addEventListener('click', function (e) {
             let delta_x = Math.abs(saved_coord[0].x - saved_coord[1].x);
             let delta_y = Math.abs(saved_coord[0].y - saved_coord[1].y);
 
-            let length = Math.sqrt(delta_x + delta_y);
+            let length = Math.sqrt(Math.pow(delta_x, 2) + Math.pow(delta_y, 2));
             console.log(length);
             jarak_text.textContent = ` Jarak: ${length}`;
         }
