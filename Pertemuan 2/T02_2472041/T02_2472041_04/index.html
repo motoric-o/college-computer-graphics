@@ -19,7 +19,13 @@
 <body>
     <canvas height="500" width="500" id="mycanvas" class="canvas">
     </canvas>
-    <p id="jarak">&nbsp; Jarak: </p>
+    <form>
+        &nbsp;
+        X <input type="text" id="x" name="x" value="0"> &nbsp;
+        Y <input type="text" id="y" name="y" value="0"> &nbsp;
+        <input type="button" onclick="addLocation()" value="Tambah Titik" id="tambah">
+        <input type="button" onclick="clearCanvas()" value="Clear Canvas" id="clear">
+    </form>
     <script src="index.js"></script>
 </body>
 </html>

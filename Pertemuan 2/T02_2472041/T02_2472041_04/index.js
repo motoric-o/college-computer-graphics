@@ -1,13 +1,13 @@
 let canvas_handler = document.querySelector("#mycanvas");
-let jarak_text = document.querySelector("#jarak");
+let x_input = document.querySelector("#x");
+let y_input = document.querySelector("#y");
 let context = canvas_handler.getContext("2d");
 
 let counter = 0;
 
 let saved_coord = [];
-let to_clear_coord = [];
 
-const image_data = context.getImageData(
+let image_data = context.getImageData(
     0, 0,
     canvas_handler.width,
     canvas_handler.height
@@ -40,7 +40,6 @@ function dda_line(start, end, color) {
                     y = y - grad;
                 }
                 gambar_titik(x, y, color);
-                to_clear_coord.push({x: x, y: y});
             }
         } else {
             console.log('b')
@@ -52,7 +51,6 @@ function dda_line(start, end, color) {
                     y = y - grad;
                 }
                 gambar_titik(x, y, color);
-                to_clear_coord.push({x: x, y: y});
             }
         }
     } else {
@@ -66,7 +64,6 @@ function dda_line(start, end, color) {
                     x = x - 1 / grad;
                 }
                 gambar_titik(x, y, color)
-                to_clear_coord.push({x: x, y: y});
             }
         } else {
             console.log('d')
@@ -78,7 +75,6 @@ function dda_line(start, end, color) {
                     x = x - 1 / grad;
                 }
                 gambar_titik(x, y, color)
-                to_clear_coord.push({x: x, y: y});
             }
         }
     }
@@ -90,54 +86,87 @@ function kotak(start, end, color) {
             if (Math.abs(start.x - end.x) > 0) {
                 for (let x = start.x; x < end.x; x++) {
                     gambar_titik(x, y, color);
-                    to_clear_coord.push({x: x, y: y});
                 }
             } else {
                 gambar_titik(start.x, y, color);
-                to_clear_coord.push({x: start.x, y: y});
             }
         }
     } else {
         for (let x = start.x; x < end.x; x++) {
             gambar_titik(x, start.y, color);
-            to_clear_coord.push({x: x, y: start.y});
         }
     }
 }
 
-canvas_handler.addEventListener('click', function (e) {
-    if (counter < 2) {
-        x = e.x;
-        y = e.y;
+function addLocation() {
+    let x = parseInt(x_input.value);
+    let y = parseInt(y_input.value);
 
-        saved_coord.push({x: x, y: y});
+    if (saved_coord.length > 0) {
+        saved_coord.find((coord) => {
+            if (coord.x === x && coord.y === y) {
+                alert("Titik sudah ada!");
+                return true;
+            }
+        });
+    }
+    saved_coord.push({x: x, y: y});
 
-        kotak({x: saved_coord[counter].x - 2, y: saved_coord[counter].y - 2}, {x: saved_coord[counter].x + 2, y: saved_coord[counter].y + 2}, {r: 255, g: 0, b: 0});
+    // Clear canvas
+    resetCanvas();
 
-        counter += 1;
+    // Rerender coordinates
+    for (let i = 0; i < saved_coord.length; i++) {
+        let x = saved_coord[i].x;
+        let y = saved_coord[i].y;
+        kotak({x: x - 5, y: y - 5}, {x: x + 5, y: y + 5}, {r: 255, g: 0, b: 0});
+    }
 
-        if (counter == 2) {
-            dda_line(saved_coord[0], saved_coord[1], {r: 0, g: 0, b: 255});
-            let delta_x = Math.abs(saved_coord[0].x - saved_coord[1].x);
-            let delta_y = Math.abs(saved_coord[0].y - saved_coord[1].y);
+    if (saved_coord.length > 1) {
+        // Link by nearest neighbor
+        let nearest_coords = [];
+        let already_linked = [];
 
-            let length = Math.sqrt(delta_x + delta_y);
-            console.log(length);
-            jarak_text.textContent = ` Jarak: ${length}`;
+        for (let i = 0; i < saved_coord.length; i++) {
+            let nearest = {i: -1, j: -1, distance: Number.MAX_VALUE};
+            let exists = false;
+            for (let j = 0; j < saved_coord.length; j++) {
+                let distance = Math.sqrt(Math.pow(saved_coord[i].x - saved_coord[j].x, 2) + Math.pow(saved_coord[i].y - saved_coord[j].y, 2));
+                if (distance < nearest.distance && distance > 0 && !already_linked.includes(j)) {
+                    nearest = {i: i, j: j, distance: distance};
+                }
+            }
+
+            if (nearest.i !== -1 && nearest.j !== -1) {
+                nearest_coords.push(nearest);
+                already_linked.push(i);
+            }
         }
-    } else {
-        counter = 0;
-        saved_coord = [];
-        
-        for (let i = 0; i < to_clear_coord.length; i++) {
-            x = to_clear_coord[i].x
-            y = to_clear_coord[i].y
-            gambar_titik(x, y, {r: 255, g: 255, b: 255})
+
+        console.log(nearest_coords);
+
+        for (let i = 0; i < nearest_coords.length; i++) {
+            let start = saved_coord[nearest_coords[i].i];
+            let end = saved_coord[nearest_coords[i].j];
+            dda_line(start, end, {r: 0, g: 0, b: 255});
         }
-        jarak_text.textContent = ` Jarak:`;
     }
 
     context.putImageData(image_data, 0, 0);
-});
+}
+
+function resetCanvas() {
+    for (let i = 0; i < canvas_handler.width; i++) {
+        for (let j = 0; j < canvas_handler.height; j++) {
+            gambar_titik(i, j, {r: 255, g: 255, b: 255})
+        }
+    }
+    context.putImageData(image_data, 0, 0);
+}
+
+function clearCanvas() {
+    resetCanvas();
+    saved_coord = [];
+}
 
 context.putImageData(image_data, 0, 0);
