@@ -1,3 +1,5 @@
+// Rico Dharmawan - 2472041
+
 let canvas_handler = document.querySelector("#mycanvas");
 let context = canvas_handler.getContext("2d");
 

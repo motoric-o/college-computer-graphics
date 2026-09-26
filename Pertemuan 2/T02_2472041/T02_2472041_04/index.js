@@ -1,3 +1,5 @@
+// Rico Dharmawan - 2472041
+
 let canvas_handler = document.querySelector("#mycanvas");
 let x_input = document.querySelector("#x");
 let y_input = document.querySelector("#y");
