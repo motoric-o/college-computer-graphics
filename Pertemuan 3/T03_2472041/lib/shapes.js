@@ -3,12 +3,17 @@
 import { gambar_titik, dda_line } from "./primitive.js";
 
 // T03_2472041_01
-export function matahari(image_data, xc, yc, radius, rays, color) {
+export function lingkaran(image_data, xc, yc, radius, color) {
     for (let theta = 0; theta <= Math.PI*2; theta += 1/radius) {
         let x = xc + radius * Math.cos(theta);
         let y = yc + radius * Math.sin(theta);
         gambar_titik(image_data, x, y, color);
     }
+
+}
+
+export function matahari(image_data, xc, yc, radius, rays, color) {
+    lingkaran(image_data, xc, yc, radius, color)
 
     for (let theta = 0; theta <= Math.PI*2; theta += Math.PI*2 / rays) {
         let x = xc + radius * Math.cos(theta);
