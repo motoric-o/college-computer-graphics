@@ -1,6 +1,4 @@
-import *  as primitive from "../lib/primitive.js";
-import * as shapes from "../lib/shapes.js";
-import * as coloring from "../lib/coloring.js";
+import *  as lib from '../lib/index.js';
 
 let canvas_handler = document.querySelector("#mycanvas");
 let context = canvas_handler.getContext("2d");
@@ -11,5 +9,10 @@ const image_data = context.getImageData(
     canvas_handler.height
 );
 
+let pixel = new lib.Pixel(image_data);
+let Color = lib.Color;
+let Coordinate = lib.Coordinate;
+let coloring = new lib.Coloring(image_data);
+let shapes = new lib.Shapes(image_data);
 
 context.putImageData(image_data, 0, 0);
