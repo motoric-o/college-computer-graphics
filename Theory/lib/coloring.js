@@ -1,9 +1,10 @@
 import * as primitive from "./primitive.js";
 
-export function boundary_fill(image_data, x, y, boundary_color, color) {
+export function boundary_fill(image_data, x, y, color) {
     let dot = primitive.get_dot(x, y);
     let dot_color = primitive.get_dot_color(image_data, dot);
-    if (primitive.compare_color(dot_color, boundary_color) || primitive.compare_color(dot_color, color)) {
+    let initial_color = primitive.get_dot_color(image_data, primitive.get_dot(x, y));
+    if (primitive.compare_color(dot_color, color) || primitive.compare_color(dot_color, initial_color) == false) {
         return false;
     } else {
         primitive.gambar_titik(image_data, dot.x, dot.y, color);
@@ -14,13 +15,13 @@ export function boundary_fill(image_data, x, y, boundary_color, color) {
     }
 }
 
-export function boundary_fill_nonrec(image_data, x, y, boundary_color, color) {
+export function boundary_fill_nonrec(image_data, x, y, color) {
     let stack = [primitive.get_dot(x, y)];
-
+    let initial_color = primitive.get_dot_color(image_data, primitive.get_dot(x, y));
     while (stack.length > 0) {
         let dot = stack.pop();
         let dot_color = primitive.get_dot_color(image_data, dot);
-        if (primitive.compare_color(dot_color, boundary_color) || primitive.compare_color(dot_color, color)) {
+        if (primitive.compare_color(dot_color, color) || primitive.compare_color(dot_color, initial_color) == false) {
             continue;
         } else {
             primitive.gambar_titik(image_data, dot.x, dot.y, color);

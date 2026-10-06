@@ -1,23 +1,5 @@
 import * as primitive from "./primitive.js";
 
-export function kotak(image_data, start, end, color) {
-    if (Math.abs(start.y - end.y) > 0) {
-        for (let y = start.y; y < end.y; y++) {
-            if (Math.abs(start.x - end.x) > 0) {
-                for (let x = start.x; x < end.x; x++) {
-                    primitive.gambar_titik(image_data, x, y, color);
-                }
-            } else {
-                primitive.gambar_titik(image_data, start.x, y, color);
-            }
-        }
-    } else {
-        for (let x = start.x; x < end.x; x++) {
-            primitive.gambar_titik(image_data, x, start.y, color);
-        }
-    }
-}
-
 export function naive_circle(image_data, xc, yc, radius, color) {
     for (let x = xc - radius; x <= xc + radius; x++) {
         let y = Math.sqrt(radius**2 - (x - xc)**2) + yc;
@@ -29,7 +11,7 @@ export function naive_circle(image_data, xc, yc, radius, color) {
     }
 }
 
-export function circle(image_data, xc, yc, radius, color) {
+export function lingkaran_polar(image_data, xc, yc, radius, color) {
     let dot_coords = [];
     for (let theta = 0; theta <= Math.PI*2; theta += 1/radius) {
         let x = xc + radius * Math.cos(theta);
