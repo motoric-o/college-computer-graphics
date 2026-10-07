@@ -1,4 +1,6 @@
-import *  as lib from '../../../lib/index.js';
+// Rico Dharmawan - 2472041
+
+import *  as lib from '../lib/index.js';
 
 let canvas_handler = document.querySelector("#mycanvas");
 let context = canvas_handler.getContext("2d");

@@ -1,6 +1,6 @@
 // Rico Dharmawan - 2472041
 
-import *  as lib from '../../../lib/index.js';
+import *  as lib from '../lib/index.js';
 
 let canvas_handler = document.querySelector("#mycanvas");
 let ganti_lampu = document.querySelector("#ganti");
