@@ -1,6 +1,4 @@
-// Rico Dharmawan - 2472041
-
-import *  as lib from '../lib/index.js';
+import *  as lib from '../../../lib/index.js';
 
 let canvas_handler = document.querySelector("#mycanvas");
 let context = canvas_handler.getContext("2d");
@@ -16,5 +14,6 @@ let Color = lib.Color;
 let Coordinate = lib.Coordinate;
 let coloring = new lib.Coloring(image_data);
 let shapes = new lib.Shapes(image_data);
+
 
 context.putImageData(image_data, 0, 0);
