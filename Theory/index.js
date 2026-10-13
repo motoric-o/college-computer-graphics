@@ -1,6 +1,6 @@
 // 2472041 - Rico Dharmawan
 
-import *  as lib from '../lib/index.js';
+import { grafLib } from "../lib/index.js";
 
 let canvas_handler = document.querySelector("#mycanvas");
 let context = canvas_handler.getContext("2d");
@@ -11,13 +11,12 @@ const image_data = context.getImageData(
     canvas_handler.height
 );
 
-let pixel = new lib.Pixel(image_data);
-let Color = lib.Color;
-let Coordinate = lib.Coordinate;
-let coloring = new lib.Coloring(image_data);
-let shapes = new lib.Shapes(image_data);
+const GrafLib = new grafLib(image_data);
 
-shapes.polar_circle(Coordinate(100, 100), 50, lib.Color(0, 255, 0, 255));
-coloring.boundaryFill(Coordinate(100, 100), Color(255, 0, 0, 255), Color(0, 255, 0, 255));
+GrafLib.Shapes.polar_circle(GrafLib.Util.Coordinate(100, 100), 50, GrafLib.Util.Color(0, 255, 0, 255));
+GrafLib.Coloring.boundaryFill(GrafLib.Util.Coordinate(100, 100), GrafLib.Util.Color(255, 0, 0, 255), GrafLib.Util.Color(0, 255, 0, 255));
+
+GrafLib.Shapes.polar_circle(GrafLib.Util.Coordinate(300, 300), 50, GrafLib.Util.Color(0, 0, 255));
+GrafLib.Coloring.floodFill(GrafLib.Util.Coordinate(300, 300), GrafLib.Util.Color(255, 255, 0))
 
 context.putImageData(image_data, 0, 0);
