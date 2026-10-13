@@ -20,7 +20,7 @@ function resize() {
     GrafLib.refreshScreen();
     GrafLib.Shapes.polar_circle(GrafLib.Util.Coordinate(250, 250), radius, GrafLib.Util.Color(0, 0, 0));
     GrafLib.Coloring.floodFill(GrafLib.Util.Coordinate(250, 250), GrafLib.Util.Color(255, 0, 0));
-    GrafLib.context.putImageData(GrafLib.image_data, 0, 0);
+    GrafLib.putImageData();
     animId = requestAnimationFrame(resize);
 }
 

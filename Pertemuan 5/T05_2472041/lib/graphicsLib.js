@@ -32,6 +32,22 @@ export class graphicsLib {
     //     this.image_data = this.context.getImageData(0, 0, this.width, this.height);
     // }
 
+    getCentroid(points) {
+        let x = 0;
+        let y = 0;
+
+        for (let point of points) {
+            x += point.x;
+            y += point.y;
+        }
+
+        return primitive.Coordinate(Math.round(x / points.length), Math.round(y / points.length));
+    }
+
+    putImageData() {
+        this.context.putImageData(this.image_data, 0, 0);
+    }
+
     refreshScreen() {
         for (let i = 0; i <= this.height; i++) {
             this.Line.draw(primitive.Coordinate(0, i), primitive.Coordinate(this.width, i), primitive.Color(255, 255, 255));
