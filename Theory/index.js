@@ -1,3 +1,5 @@
+// 2472041 - Rico Dharmawan
+
 import *  as lib from '../lib/index.js';
 
 let canvas_handler = document.querySelector("#mycanvas");
@@ -15,7 +17,7 @@ let Coordinate = lib.Coordinate;
 let coloring = new lib.Coloring(image_data);
 let shapes = new lib.Shapes(image_data);
 
-shapes.polar_circle(100, 100, 50, lib.Color(0, 255, 0, 255));
-coloring.boundaryFillCustom(100, 100, lib.Color(255, 0, 0, 255), lib.Color(0, 255, 0, 255));
+shapes.polar_circle(Coordinate(100, 100), 50, lib.Color(0, 255, 0, 255));
+coloring.boundaryFill(Coordinate(100, 100), Color(255, 0, 0, 255), Color(0, 255, 0, 255));
 
 context.putImageData(image_data, 0, 0);

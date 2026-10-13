@@ -1,4 +1,4 @@
-// Rico Dharmawan - 2472041
+// 2472041 - Rico Dharmawan
 
 import *  as lib from '../lib/index.js';
 
