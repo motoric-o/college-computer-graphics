@@ -1,59 +1,59 @@
 // 2472041 - Rico Dharmawan
 
-import { graphicsLib } from "../lib/graphicsLib.js";
+import { graphicsLib } from "../lib/graphics/graphicsLib.js";
 
 let canvas_handler = document.querySelector("#mycanvas");
 let context = canvas_handler.getContext("2d", { willReadFrequently: true });
 
 const GrafLib = new graphicsLib(context, canvas_handler);
 let fan_coords = [
-    GrafLib.Util.Coordinate(250, 140),
-    GrafLib.Util.Coordinate(270, 70),
-    GrafLib.Util.Coordinate(230, 70),
-    GrafLib.Util.Coordinate(250, 160),
-    GrafLib.Util.Coordinate(270, 230),
-    GrafLib.Util.Coordinate(230, 230),
-    GrafLib.Util.Coordinate(240, 150),
-    GrafLib.Util.Coordinate(170, 130),
-    GrafLib.Util.Coordinate(170, 170),
-    GrafLib.Util.Coordinate(260, 150),
-    GrafLib.Util.Coordinate(330, 130),
-    GrafLib.Util.Coordinate(330, 170)
+    GrafLib.Util.Vector2(250, 140),
+    GrafLib.Util.Vector2(270, 70),
+    GrafLib.Util.Vector2(230, 70),
+    GrafLib.Util.Vector2(250, 160),
+    GrafLib.Util.Vector2(270, 230),
+    GrafLib.Util.Vector2(230, 230),
+    GrafLib.Util.Vector2(240, 150),
+    GrafLib.Util.Vector2(170, 130),
+    GrafLib.Util.Vector2(170, 170),
+    GrafLib.Util.Vector2(260, 150),
+    GrafLib.Util.Vector2(330, 130),
+    GrafLib.Util.Vector2(330, 170)
 ]
 let coloring_coords = [
-    GrafLib.Util.Coordinate(250, 130),
-    GrafLib.Util.Coordinate(250, 170),
-    GrafLib.Util.Coordinate(230, 150),
-    GrafLib.Util.Coordinate(270, 150)
+    GrafLib.Util.Vector2(250, 130),
+    GrafLib.Util.Vector2(250, 170),
+    GrafLib.Util.Vector2(230, 150),
+    GrafLib.Util.Vector2(270, 150)
 ]
 let rotation = 0;
 
 function draw_stand() {
     GrafLib.Shapes.polygon([
-        GrafLib.Util.Coordinate(350, 450),
-        GrafLib.Util.Coordinate(150, 450),
-        GrafLib.Util.Coordinate(170, 400),
-        GrafLib.Util.Coordinate(330, 400)
+        GrafLib.Util.Vector2(350, 450),
+        GrafLib.Util.Vector2(150, 450),
+        GrafLib.Util.Vector2(170, 400),
+        GrafLib.Util.Vector2(330, 400)
     ], GrafLib.Util.Color(0, 0, 0));
 
-    GrafLib.Coloring.floodFill(GrafLib.Util.Coordinate(250, 425), GrafLib.Util.Color(50, 50, 125));
+    GrafLib.Coloring.floodFill(GrafLib.Util.Vector2(250, 425), GrafLib.Util.Color(50, 50, 125));
 
     GrafLib.Shapes.polygon([
-        GrafLib.Util.Coordinate(225, 400),
-        GrafLib.Util.Coordinate(275, 400),
-        GrafLib.Util.Coordinate(275, 250),
-        GrafLib.Util.Coordinate(225, 250)
+        GrafLib.Util.Vector2(225, 400),
+        GrafLib.Util.Vector2(275, 400),
+        GrafLib.Util.Vector2(275, 250),
+        GrafLib.Util.Vector2(225, 250)
     ], GrafLib.Util.Color(0, 0, 0));
 
-    GrafLib.Coloring.floodFill(GrafLib.Util.Coordinate(250, 300), GrafLib.Util.Color(150, 150, 150));
+    GrafLib.Coloring.floodFill(GrafLib.Util.Vector2(250, 300), GrafLib.Util.Color(150, 150, 150));
 
-    GrafLib.Shapes.polar_circle(GrafLib.Util.Coordinate(250, 150), 100, GrafLib.Util.Color(0, 0, 0));
-    GrafLib.Shapes.polar_circle(GrafLib.Util.Coordinate(250, 150), 90, GrafLib.Util.Color(0, 0, 0));
+    GrafLib.Shapes.polar_circle(GrafLib.Util.Vector2(250, 150), 100, GrafLib.Util.Color(0, 0, 0));
+    GrafLib.Shapes.polar_circle(GrafLib.Util.Vector2(250, 150), 90, GrafLib.Util.Color(0, 0, 0));
 
-    GrafLib.Coloring.floodFill(GrafLib.Util.Coordinate(250, 245), GrafLib.Util.Color(150, 150, 150));
+    GrafLib.Coloring.floodFill(GrafLib.Util.Vector2(250, 245), GrafLib.Util.Color(150, 150, 150));
 
-    GrafLib.Shapes.polar_circle(GrafLib.Util.Coordinate(250, 150), 10, GrafLib.Util.Color(0, 0, 0));
-    GrafLib.Coloring.floodFill(GrafLib.Util.Coordinate(250, 150), GrafLib.Util.Color(0, 0, 0));
+    GrafLib.Shapes.polar_circle(GrafLib.Util.Vector2(250, 150), 10, GrafLib.Util.Color(0, 0, 0));
+    GrafLib.Coloring.floodFill(GrafLib.Util.Vector2(250, 150), GrafLib.Util.Color(0, 0, 0));
 }
 
 function step() {
@@ -62,8 +62,8 @@ function step() {
     draw_stand();
 
     rotation += 0.01;
-    let rotated_fan = GrafLib.Transform.rotate_multiple(fan_coords, rotation, GrafLib.Util.Coordinate(250, 150));
-    let rotated_color = GrafLib.Transform.rotate_multiple(coloring_coords, rotation, GrafLib.Util.Coordinate(250, 150));
+    let rotated_fan = GrafLib.Transform.rotate_multiple(fan_coords, rotation, GrafLib.Util.Vector2(250, 150));
+    let rotated_color = GrafLib.Transform.rotate_multiple(coloring_coords, rotation, GrafLib.Util.Vector2(250, 150));
 
     // Top
     GrafLib.Shapes.polygon([

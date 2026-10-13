@@ -1,74 +1,63 @@
 // 2472041 - Rico Dharmawan
 
-import { TaskClass } from "../../../lib/engine/task.js";
+import { PhysicsEngine } from "../../../lib/engine/physicsEngine.js";
 import { graphicsLib } from "../../../lib/graphics/graphicsLib.js";
+import { GameObject } from "../../../lib/engine/object.js";
 
 let canvas_handler = document.querySelector("#mycanvas");
 let context = canvas_handler.getContext("2d", { willReadFrequently: true });
 let angle = 0;
 
+let angles = [];
+
 const GrafLib = new graphicsLib(context, canvas_handler);
-const Task = new TaskClass();
+const engine = new PhysicsEngine(1/60, GrafLib);
+const gun = new GameObject()
+    .setVertices([
+        GrafLib.Util.Vector2(-25, 10),
+        GrafLib.Util.Vector2(25, 10),
+        GrafLib.Util.Vector2(25, -10),
+        GrafLib.Util.Vector2(-25, -10)
+    ])
+    .setPosition(GrafLib.getCentroid([
+        GrafLib.Util.Vector2(30, 475),
+        GrafLib.Util.Vector2(80, 475),
+        GrafLib.Util.Vector2(80, 455),
+        GrafLib.Util.Vector2(30, 455)
+    ]));
 
-
-console.log(threads.getItem(0))
-
-let gun_coords = [
-    GrafLib.Util.Coordinate(30, 475),
-    GrafLib.Util.Coordinate(80, 475),
-    GrafLib.Util.Coordinate(80, 455),
-    GrafLib.Util.Coordinate(30, 455)
-];
-
-let gun_anchor = GrafLib.getCentroid([
-    GrafLib.Util.Coordinate(30, 475),
-    GrafLib.Util.Coordinate(80, 475),
-    GrafLib.Util.Coordinate(80, 455),
-    GrafLib.Util.Coordinate(30, 455)
-]);
-
-let angles = []
-let bulletPos = gun_anchor;
-let bulletDist = 25;
-
-GrafLib.Shapes.polygon(gun_coords, GrafLib.Util.Color(0, 0, 0));
-GrafLib.putImageData();
-
-function render() {
-    GrafLib.refreshScreen();
-
-    rotasi_fp();
-
-    translasi();
-
-    requestAnimationFrame(render);
-
-    GrafLib.putImageData();
-}
-
-function translasi(bulletIndex) {
-    let x = bulletPos.x + bulletDist * Math.cos(angles[0]);
-    let y = bulletPos.y + bulletDist * Math.sin(angles[0]);
-
-    GrafLib.Shapes.polar_circle(GrafLib.Util.Coordinate(x, y), 5, GrafLib.Util.Color(255, 0, 0));
-    GrafLib.Coloring.boundaryFill(GrafLib.Util.Coordinate(x, y), GrafLib.Util.Color(255, 0, 0), GrafLib.Util.Color(255, 0, 0));
-    bulletDist += 1;
-}
-
-function rotasi_fp() {
-    let rotated = GrafLib.Transform.rotate_multiple(gun_coords, angle, gun_anchor)
-    GrafLib.Shapes.polygon(rotated, GrafLib.Util.Color(0, 0, 0));
-}
+engine.addObject(gun);
+engine.start();
 
 canvas_handler.addEventListener('mousemove', function(e) {
     let mouseX = e.offsetX;
     let mouseY = e.offsetY;
 
+    const gun_anchor = gun.position;
+
     angle = Math.atan2(gun_anchor.y - mouseY, gun_anchor.x - mouseX) + Math.PI - (2 * Math.PI);
+
+    gun.rotation = angle;
 });
 
 canvas_handler.addEventListener('click', function() {
     angles.push(angle);
-});
 
-render();
+    let x = gun.position.x + 25 * Math.cos(angle);
+    let y = gun.position.y + 25 * Math.sin(angle);
+
+    let vx = 500 * Math.cos(angle);
+    let vy = 500 * Math.sin(angle);
+
+    const bullet = new GameObject()
+        .setRotation(angles[0])
+        .setVertices([
+            GrafLib.Util.Vector2(0, 0)
+        ])
+        .setRadius(5)
+        .setColor(GrafLib.Util.Color(255, 0, 0))
+        .setPosition(GrafLib.Util.Vector2(x, y))
+        .setVelocity(GrafLib.Util.Vector2(vx, vy))
+
+    engine.addObject(bullet)
+});
