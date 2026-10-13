@@ -1,22 +1,42 @@
 // 2472041 - Rico Dharmawan
 
-import { grafLib } from "../lib/index.js";
+import { graphicsLib } from "../lib/graphicsLib.js";
 
 let canvas_handler = document.querySelector("#mycanvas");
-let context = canvas_handler.getContext("2d");
+let context = canvas_handler.getContext("2d", { willReadFrequently: true });
 
-const image_data = context.getImageData(
-    0, 0,
-    canvas_handler.width,
-    canvas_handler.height
-);
+const GrafLib = new graphicsLib(context, canvas_handler);
 
-const GrafLib = new grafLib(image_data);
+let array_titik = [
+    GrafLib.Util.Coordinate(100, 100),
+    GrafLib.Util.Coordinate(100, 200),
+    GrafLib.Util.Coordinate(200, 200)
+];
 
-GrafLib.Shapes.polar_circle(GrafLib.Util.Coordinate(100, 100), 50, GrafLib.Util.Color(0, 255, 0, 255));
-GrafLib.Coloring.boundaryFill(GrafLib.Util.Coordinate(100, 100), GrafLib.Util.Color(255, 0, 0, 255), GrafLib.Util.Color(0, 255, 0, 255));
+let array_titik2 = GrafLib.Transform.translate_multiple(array_titik, GrafLib.Util.Coordinate(1, 1));
+// GrafLib.Shapes.polygon(array_titik2, GrafLib.Util.Color(255, 0, 0));
 
-GrafLib.Shapes.polar_circle(GrafLib.Util.Coordinate(300, 300), 50, GrafLib.Util.Color(0, 0, 255));
-GrafLib.Coloring.floodFill(GrafLib.Util.Coordinate(300, 300), GrafLib.Util.Color(255, 255, 0))
+// let scaled = GrafLib.Transform.scale_multiple(array_titik, 2);
+// GrafLib.Shapes.polygon(scaled, GrafLib.Util.Color(255, 0, 0));
 
-context.putImageData(image_data, 0, 0);
+// let rotated = GrafLib.Transform.rotate_multiple(scaled, 45);
+// GrafLib.Shapes.polygon(rotated, GrafLib.Util.Color(255, 0, 0));
+
+function drawFrame() {
+    GrafLib.refreshScreen();
+    array_titik2 = GrafLib.Transform.rotate_multiple(array_titik2, 0.1, GrafLib.Util.Coordinate(150, 150));
+    GrafLib.Shapes.polygon(array_titik2, GrafLib.Util.Color(255, 0, 0));
+    context.putImageData(GrafLib.image_data, 0, 0);
+    requestAnimationFrame(drawFrame);
+}
+
+drawFrame();
+
+// setInterval(function() {
+//     GrafLib.clearScreen();
+//     array_titik2 = GrafLib.Transform.translate_multiple(array_titik2, GrafLib.Util.Coordinate(1, 1));
+//     GrafLib.Shapes.polygon(array_titik2, GrafLib.Util.Color(255, 0, 0));
+//     context.putImageData(GrafLib.image_data, 0, 0);
+// }, 16.67)
+
+context.putImageData(GrafLib.image_data, 0, 0);
