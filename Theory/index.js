@@ -38,5 +38,3 @@ drawFrame();
 //     GrafLib.Shapes.polygon(array_titik2, GrafLib.Util.Color(255, 0, 0));
 //     context.putImageData(GrafLib.image_data, 0, 0);
 // }, 16.67)
-
-context.putImageData(GrafLib.image_data, 0, 0);
