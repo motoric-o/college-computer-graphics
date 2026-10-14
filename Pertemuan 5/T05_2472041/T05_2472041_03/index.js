@@ -3,7 +3,6 @@
 import { PhysicsEngine } from "../../../lib/engine/physicsEngine.js";
 import { graphicsLib } from "../../../lib/graphics/graphicsLib.js";
 import { GameObject } from "../../../lib/engine/object.js";
-import { Layer } from "../../../lib/engine/layer.js";
 
 let canvas_handler = document.querySelector("#mycanvas");
 let context = canvas_handler.getContext("2d", { willReadFrequently: true });
@@ -65,11 +64,11 @@ canvas_handler.addEventListener('click', function() {
         ])
         .setRadius(5)
         .setColor(GrafLib.Util.Color(255, 0, 0))
-        .setPosition(GrafLib.Util.Vector2(x, y))
         .setLocalAnchor(GrafLib.Util.Vector2(x, y))
+        .setPosition(GrafLib.Util.Vector2(x, y))
         .setVelocity(GrafLib.Util.Vector2(vx, vy))
         .setFills([
-            GrafLib.Coloring.createFillInfo("FF", [GrafLib.Util.Color(255, 0, 0), GrafLib.Util.Color(255, 0, 0)], GrafLib.Util.Vector2(0, 0))
+            GrafLib.Coloring.createFillInfo("BF", [GrafLib.Util.Color(255, 0, 0), GrafLib.Util.Color(255, 0, 0)], GrafLib.Util.Vector2(0, 0))
         ]);
 
     engine.addObject(bullet)
