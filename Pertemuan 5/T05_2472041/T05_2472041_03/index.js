@@ -3,6 +3,7 @@
 import { PhysicsEngine } from "../../../lib/engine/physicsEngine.js";
 import { graphicsLib } from "../../../lib/graphics/graphicsLib.js";
 import { GameObject } from "../../../lib/engine/object.js";
+import { Layer } from "../../../lib/engine/layer.js";
 
 let canvas_handler = document.querySelector("#mycanvas");
 let context = canvas_handler.getContext("2d", { willReadFrequently: true });
@@ -13,6 +14,7 @@ let angles = [];
 const GrafLib = new graphicsLib(context, canvas_handler);
 const engine = new PhysicsEngine(1/60, GrafLib);
 const gun = new GameObject()
+    .setName("Gun")
     .setVertices([
         GrafLib.Util.Vector2(-25, 10),
         GrafLib.Util.Vector2(25, 10),
@@ -50,6 +52,7 @@ canvas_handler.addEventListener('click', function() {
     let vy = 500 * Math.sin(angle);
 
     const bullet = new GameObject()
+        .setName("bullet")
         .setRotation(angles[0])
         .setVertices([
             GrafLib.Util.Vector2(0, 0)
@@ -60,4 +63,7 @@ canvas_handler.addEventListener('click', function() {
         .setVelocity(GrafLib.Util.Vector2(vx, vy))
 
     engine.addObject(bullet)
+    let l = new Layer();
+    console.log(l.parseId(bullet.id))
+    
 });
