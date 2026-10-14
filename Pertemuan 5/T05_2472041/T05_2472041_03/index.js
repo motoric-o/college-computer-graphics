@@ -13,6 +13,13 @@ let angles = [];
 
 const GrafLib = new graphicsLib(context, canvas_handler);
 const engine = new PhysicsEngine(1/60, GrafLib);
+
+const gun_center = GrafLib.getCentroid([
+        GrafLib.Util.Vector2(30, 475),
+        GrafLib.Util.Vector2(80, 475),
+        GrafLib.Util.Vector2(80, 455),
+        GrafLib.Util.Vector2(30, 455)
+]);
 const gun = new GameObject()
     .setName("Gun")
     .setVertices([
@@ -21,14 +28,13 @@ const gun = new GameObject()
         GrafLib.Util.Vector2(25, -10),
         GrafLib.Util.Vector2(-25, -10)
     ])
-    .setPosition(GrafLib.getCentroid([
-        GrafLib.Util.Vector2(30, 475),
-        GrafLib.Util.Vector2(80, 475),
-        GrafLib.Util.Vector2(80, 455),
-        GrafLib.Util.Vector2(30, 455)
-    ]));
+    .setLocalAnchor(gun_center)
+    .setPosition(gun_center)
+    .setFills([
+        GrafLib.Coloring.createFillInfo("BF", [GrafLib.Util.Color(150, 150, 150), GrafLib.Util.Color(0, 0, 0)], GrafLib.Util.Vector2(0, 0))
+    ]);
 
-engine.addObject(gun);
+engine.addObject(gun, 1);
 engine.start();
 
 canvas_handler.addEventListener('mousemove', function(e) {
@@ -60,10 +66,12 @@ canvas_handler.addEventListener('click', function() {
         .setRadius(5)
         .setColor(GrafLib.Util.Color(255, 0, 0))
         .setPosition(GrafLib.Util.Vector2(x, y))
+        .setLocalAnchor(GrafLib.Util.Vector2(x, y))
         .setVelocity(GrafLib.Util.Vector2(vx, vy))
+        .setFills([
+            GrafLib.Coloring.createFillInfo("FF", [GrafLib.Util.Color(255, 0, 0), GrafLib.Util.Color(255, 0, 0)], GrafLib.Util.Vector2(0, 0))
+        ]);
 
     engine.addObject(bullet)
-    let l = new Layer();
-    console.log(l.parseId(bullet.id))
     
 });
