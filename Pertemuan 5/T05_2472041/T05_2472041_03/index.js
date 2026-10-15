@@ -27,13 +27,13 @@ const gun = new GameObject()
         GrafLib.Util.Vector2(25, -10),
         GrafLib.Util.Vector2(-25, -10)
     ])
-    .setLocalAnchor(gun_center)
     .setPosition(gun_center)
     .setFills([
         GrafLib.Coloring.createFillInfo("BF", [GrafLib.Util.Color(150, 150, 150), GrafLib.Util.Color(0, 0, 0)], GrafLib.Util.Vector2(0, 0))
     ]);
 
 engine.addObject(gun, 1);
+
 engine.start();
 
 canvas_handler.addEventListener('mousemove', function(e) {
@@ -41,10 +41,10 @@ canvas_handler.addEventListener('mousemove', function(e) {
     let mouseY = e.offsetY;
 
     const gun_anchor = gun.position;
-
+    
     angle = Math.atan2(gun_anchor.y - mouseY, gun_anchor.x - mouseX) + Math.PI - (2 * Math.PI);
 
-    gun.rotation = angle;
+    gun.updateRotation(angle);
 });
 
 canvas_handler.addEventListener('click', function() {
@@ -53,18 +53,16 @@ canvas_handler.addEventListener('click', function() {
     let x = gun.position.x + 25 * Math.cos(angle);
     let y = gun.position.y + 25 * Math.sin(angle);
 
-    let vx = 500 * Math.cos(angle);
-    let vy = 500 * Math.sin(angle);
+    let vx = 50 * Math.cos(angle);
+    let vy = 50 * Math.sin(angle);
 
     const bullet = new GameObject()
         .setName("bullet")
-        .setRotation(angles[0])
         .setVertices([
             GrafLib.Util.Vector2(0, 0)
         ])
         .setRadius(5)
         .setColor(GrafLib.Util.Color(255, 0, 0))
-        .setLocalAnchor(GrafLib.Util.Vector2(x, y))
         .setPosition(GrafLib.Util.Vector2(x, y))
         .setVelocity(GrafLib.Util.Vector2(vx, vy))
         .setFills([
@@ -72,5 +70,4 @@ canvas_handler.addEventListener('click', function() {
         ]);
 
     engine.addObject(bullet)
-    
 });
