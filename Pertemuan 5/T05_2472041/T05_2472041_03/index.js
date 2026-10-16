@@ -19,60 +19,64 @@ const gun_center = GrafLib.getCentroid([
     GrafLib.Util.Vector2(80, 455),
     GrafLib.Util.Vector2(30, 455)
 ]);
-// const gun = new GameObject()
-//     .setName("Gun")
-//     .setVertices([
-//         GrafLib.Util.Vector2(-25, 10),
-//         GrafLib.Util.Vector2(25, 10),
-//         GrafLib.Util.Vector2(25, -10),
-//         GrafLib.Util.Vector2(-25, -10)
-//     ])
-//     .setPosition(gun_center)
-//     .setFills([
-//         GrafLib.Coloring.createFillInfo("BF", [GrafLib.Util.Color(150, 150, 150), GrafLib.Util.Color(0, 0, 0)], GrafLib.Util.Vector2(0, 0))
-//     ]);
+const gun = new GameObject()
+    .setName("Gun")
+    .setVertices([
+        GrafLib.Util.Vector2(-25, 10),
+        GrafLib.Util.Vector2(25, 10),
+        GrafLib.Util.Vector2(25, -10),
+        GrafLib.Util.Vector2(-25, -10)
+    ])
+    .setPosition(gun_center)
+    .setFills([
+        GrafLib.Coloring.createFillInfo("BF", [GrafLib.Util.Color(150, 150, 150), GrafLib.Util.Color(0, 0, 0)], GrafLib.Util.Vector2(0, 0))
+    ]);
 
-// engine.addObject(gun, 1);
+engine.addObject(gun, 1);
 
-// engine.start();
+engine.start();
 
-// canvas_handler.addEventListener('mousemove', function(e) {
-//     let mouseX = e.offsetX;
-//     let mouseY = e.offsetY;
+canvas_handler.addEventListener('mousemove', function(e) {
+    let mouseX = e.offsetX;
+    let mouseY = e.offsetY;
 
-//     const gun_anchor = gun.position;
+    const gun_anchor = gun.position;
 
-//     angle = Math.atan2(gun_anchor.y - mouseY, gun_anchor.x - mouseX) + Math.PI - (2 * Math.PI);
+    angle = Math.atan2(gun_anchor.y - mouseY, gun_anchor.x - mouseX) + Math.PI - (2 * Math.PI);
 
-//     gun.updateRotation(angle);
-// });
+    gun.updateRotation(angle);
+});
 
-// canvas_handler.addEventListener('click', function() {
-//     angles.push(angle);
+canvas_handler.addEventListener('click', function() {
+    angles.push(angle);
 
-//     let x = gun.position.x + 25 * Math.cos(angle);
-//     let y = gun.position.y + 25 * Math.sin(angle);
+    let x = gun.position.x + 25 * Math.cos(angle);
+    let y = gun.position.y + 25 * Math.sin(angle);
 
-//     let vx = 10 * Math.cos(angle);
-//     let vy = 10 * Math.sin(angle);
+    let vx = 10 * Math.cos(angle);
+    let vy = 10 * Math.sin(angle);
 
-//     const bullet = new GameObject()
-//         .setName("bullet")
-//         .setVertices([
-//             GrafLib.Util.Vector2(0, 0)
-//         ])
-//         .setRadius(5)
-//         .setColor(GrafLib.Util.Color(255, 0, 0))
-//         .setPosition(GrafLib.Util.Vector2(x, y))
-//         .setVelocity(GrafLib.Util.Vector2(vx, vy))
-//         .setFills([
-//             GrafLib.Coloring.createFillInfo("BF", [GrafLib.Util.Color(255, 0, 0), GrafLib.Util.Color(255, 0, 0)], GrafLib.Util.Vector2(0, 0))
-//         ]);
+    const bullet = new GameObject()
+        .setName("bullet")
+        .setVertices([
+            GrafLib.Util.Vector2(0, 0)
+        ])
+        .setRadius(5)
+        .setColor(GrafLib.Util.Color(255, 0, 0))
+        .setPosition(GrafLib.Util.Vector2(x, y))
+        .setVelocity(GrafLib.Util.Vector2(vx, vy))
+        .setFills([
+            GrafLib.Coloring.createFillInfo("BF", [GrafLib.Util.Color(255, 0, 0), GrafLib.Util.Color(255, 0, 0)], GrafLib.Util.Vector2(0, 0))
+        ]);
 
-//     engine.addObject(bullet)
-// });
+    engine.addObject(bullet)
+});
 
-engine.start()
+
+
+
+
+// engine.start()
 
 // top right
 // const bullet = new GameObject()
@@ -101,16 +105,25 @@ engine.start()
 //     ]);
 
 // bottom right
-const bullet = new GameObject()
-    .setName("bullet")
-    .setVertices([
-        GrafLib.Util.Vector2(0, 0)
-    ])
-    .setRadius(5)
-    .setColor(GrafLib.Util.Color(255, 0, 0))
-    .setPosition(GrafLib.Util.Vector2(503, 503))
-    .setFills([
-        GrafLib.Coloring.createFillInfo("BF", [GrafLib.Util.Color(255, 0, 0), GrafLib.Util.Color(255, 0, 0)], GrafLib.Util.Vector2(0, 0))
-    ]);
+// const bullet = new GameObject()
+//     .setName("bullet")
+//     .setVertices([
+//         GrafLib.Util.Vector2(0, 0)
+//     ])
+//     .setRadius(5)
+//     .setColor(GrafLib.Util.Color(255, 0, 0))
+//     .setPosition(GrafLib.Util.Vector2(503, 503))
+//     .setVelocity(-50, -50)
+//     .setFills([
+//         GrafLib.Coloring.createFillInfo("BF", [GrafLib.Util.Color(255, 0, 0), GrafLib.Util.Color(255, 0, 0)], GrafLib.Util.Vector2(0, 0))
+//     ]);
 
-engine.addStaticObject(bullet, 0);
+// const bullet = new GameObject()
+//     .setVertices([
+//         GrafLib.Util.Vector2(0, 0)
+//     ])
+//     .setPosition(GrafLib.Util.Vector2(0, 0))
+//     .setColor(GrafLib.Util.Color(255, 0, 0))
+
+
+// engine.addStaticObject(bullet, 0);
