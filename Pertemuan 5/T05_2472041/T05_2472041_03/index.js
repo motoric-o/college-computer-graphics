@@ -19,19 +19,36 @@ const gun_center = GrafLib.getCentroid([
     GrafLib.Util.Vector2(80, 455),
     GrafLib.Util.Vector2(30, 455)
 ]);
-const gun = new GameObject()
-    .setName("Gun")
+// const gun = new GameObject(GrafLib)
+//     .setName("Gun")
+//     .setVertices([
+//         GrafLib.Util.Vector2(-25, 10),
+//         GrafLib.Util.Vector2(25, 10),
+//         GrafLib.Util.Vector2(25, -10),
+//         GrafLib.Util.Vector2(-25, -10)
+//     ])
+//     .setPosition(gun_center)
+//     .setFills([
+//         GrafLib.Coloring.createFillInfo("BF", [GrafLib.Util.Color(150, 150, 150), GrafLib.Util.Color(0, 0, 0)], GrafLib.Util.Vector2(0, 0))
+//     ]);
+
+// engine.addObject(gun, 1);
+
+const gun = new GameObject(GrafLib)
+    .setName("TestGunLeak")
     .setVertices([
         GrafLib.Util.Vector2(-25, 10),
         GrafLib.Util.Vector2(25, 10),
         GrafLib.Util.Vector2(25, -10),
         GrafLib.Util.Vector2(-25, -10)
     ])
-    .setPosition(gun_center)
+    .setPosition(GrafLib.Util.Vector2(514, 250))
+    .setRotation(Math.PI / 4) // Rotated 45 degrees
+    .setColor(GrafLib.Util.Color(0, 0, 0))
     .setFills([
-        GrafLib.Coloring.createFillInfo("BF", [GrafLib.Util.Color(150, 150, 150), GrafLib.Util.Color(0, 0, 0)], GrafLib.Util.Vector2(0, 0))
-    ]);
-
+        GrafLib.Coloring.createFillInfo("BF", [GrafLib.Util.Color(0, 0, 255), GrafLib.Util.Color(0, 0, 0)], GrafLib.Util.Vector2(0, 0))
+    ])
+    .isActive(true);
 engine.addObject(gun, 1);
 
 engine.start();
@@ -56,7 +73,7 @@ canvas_handler.addEventListener('click', function() {
     let vx = 10 * Math.cos(angle);
     let vy = 10 * Math.sin(angle);
 
-    const bullet = new GameObject()
+    const bullet = new GameObject(GrafLib)
         .setName("bullet")
         .setVertices([
             GrafLib.Util.Vector2(0, 0)
@@ -79,7 +96,7 @@ canvas_handler.addEventListener('click', function() {
 // engine.start()
 
 // top right
-// const bullet = new GameObject()
+// const bullet = new GameObject(GrafLib)
 //     .setName("bullet")
 //     .setVertices([
 //         GrafLib.Util.Vector2(0, 0)
@@ -92,7 +109,7 @@ canvas_handler.addEventListener('click', function() {
 //     ]);
 
 // bottom left
-// const bullet = new GameObject()
+// const bullet = new GameObject(GrafLib)
 //     .setName("bullet")
 //     .setVertices([
 //         GrafLib.Util.Vector2(0, 0)
@@ -105,7 +122,7 @@ canvas_handler.addEventListener('click', function() {
 //     ]);
 
 // bottom right
-// const bullet = new GameObject()
+// const bullet = new GameObject(GrafLib)
 //     .setName("bullet")
 //     .setVertices([
 //         GrafLib.Util.Vector2(0, 0)
@@ -118,7 +135,7 @@ canvas_handler.addEventListener('click', function() {
 //         GrafLib.Coloring.createFillInfo("BF", [GrafLib.Util.Color(255, 0, 0), GrafLib.Util.Color(255, 0, 0)], GrafLib.Util.Vector2(0, 0))
 //     ]);
 
-// const bullet = new GameObject()
+// const bullet = new GameObject(GrafLib)
 //     .setVertices([
 //         GrafLib.Util.Vector2(0, 0)
 //     ])
