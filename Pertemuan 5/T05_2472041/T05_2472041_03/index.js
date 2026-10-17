@@ -8,8 +8,6 @@ let canvas_handler = document.querySelector("#mycanvas");
 let context = canvas_handler.getContext("2d", { willReadFrequently: true });
 let angle = 0;
 
-let angles = [];
-
 const GrafLib = new graphicsLib(context, canvas_handler);
 const engine = new PhysicsEngine(1 / 60, GrafLib);
 
