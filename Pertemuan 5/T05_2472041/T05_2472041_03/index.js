@@ -19,36 +19,19 @@ const gun_center = GrafLib.getCentroid([
     GrafLib.Util.Vector2(80, 455),
     GrafLib.Util.Vector2(30, 455)
 ]);
-// const gun = new GameObject(GrafLib)
-//     .setName("Gun")
-//     .setVertices([
-//         GrafLib.Util.Vector2(-25, 10),
-//         GrafLib.Util.Vector2(25, 10),
-//         GrafLib.Util.Vector2(25, -10),
-//         GrafLib.Util.Vector2(-25, -10)
-//     ])
-//     .setPosition(gun_center)
-//     .setFills([
-//         GrafLib.Coloring.createFillInfo("BF", [GrafLib.Util.Color(150, 150, 150), GrafLib.Util.Color(0, 0, 0)], GrafLib.Util.Vector2(0, 0))
-//     ]);
-
-// engine.addObject(gun, 1);
-
 const gun = new GameObject(GrafLib)
-    .setName("TestGunLeak")
+    .setName("Gun")
     .setVertices([
         GrafLib.Util.Vector2(-25, 10),
         GrafLib.Util.Vector2(25, 10),
         GrafLib.Util.Vector2(25, -10),
         GrafLib.Util.Vector2(-25, -10)
     ])
-    .setPosition(GrafLib.Util.Vector2(-14, 250))
-    .setRotation(Math.PI / 4)
-    .setColor(GrafLib.Util.Color(0, 0, 0))
+    .setPosition(gun_center)
     .setFills([
-        GrafLib.Coloring.createFillInfo("BF", [GrafLib.Util.Color(0, 0, 255), GrafLib.Util.Color(0, 0, 0)], GrafLib.Util.Vector2(0, 0))
-    ])
-    .isActive(true);
+        GrafLib.Coloring.createFillInfo("BF", [GrafLib.Util.Color(150, 150, 150), GrafLib.Util.Color(0, 0, 0)], GrafLib.Util.Vector2(0, 0))
+    ]);
+
 engine.addObject(gun, 1);
 
 engine.start();
@@ -88,59 +71,3 @@ canvas_handler.addEventListener('click', function() {
 
     engine.addObject(bullet)
 });
-
-
-
-
-
-// engine.start()
-
-// top right
-// const bullet = new GameObject(GrafLib)
-//     .setName("bullet")
-//     .setVertices([
-//         GrafLib.Util.Vector2(0, 0)
-//     ])
-//     .setRadius(5)
-//     .setColor(GrafLib.Util.Color(255, 0, 0))
-//     .setPosition(GrafLib.Util.Vector2(504, -3))
-//     .setFills([
-//         GrafLib.Coloring.createFillInfo("BF", [GrafLib.Util.Color(255, 0, 0), GrafLib.Util.Color(255, 0, 0)], GrafLib.Util.Vector2(0, 0))
-//     ]);
-
-// bottom left
-// const bullet = new GameObject(GrafLib)
-//     .setName("bullet")
-//     .setVertices([
-//         GrafLib.Util.Vector2(0, 0)
-//     ])
-//     .setRadius(5)
-//     .setColor(GrafLib.Util.Color(255, 0, 0))
-//     .setPosition(GrafLib.Util.Vector2(-3, 504))
-//     .setFills([
-//         GrafLib.Coloring.createFillInfo("BF", [GrafLib.Util.Color(255, 0, 0), GrafLib.Util.Color(255, 0, 0)], GrafLib.Util.Vector2(0, 0))
-//     ]);
-
-// bottom right
-// const bullet = new GameObject(GrafLib)
-//     .setName("bullet")
-//     .setVertices([
-//         GrafLib.Util.Vector2(0, 0)
-//     ])
-//     .setRadius(5)
-//     .setColor(GrafLib.Util.Color(255, 0, 0))
-//     .setPosition(GrafLib.Util.Vector2(503, 503))
-//     .setVelocity(-50, -50)
-//     .setFills([
-//         GrafLib.Coloring.createFillInfo("BF", [GrafLib.Util.Color(255, 0, 0), GrafLib.Util.Color(255, 0, 0)], GrafLib.Util.Vector2(0, 0))
-//     ]);
-
-// const bullet = new GameObject(GrafLib)
-//     .setVertices([
-//         GrafLib.Util.Vector2(0, 0)
-//     ])
-//     .setPosition(GrafLib.Util.Vector2(0, 0))
-//     .setColor(GrafLib.Util.Color(255, 0, 0))
-
-
-// engine.addStaticObject(bullet, 0);
