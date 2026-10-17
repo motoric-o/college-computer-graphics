@@ -42,8 +42,8 @@ const gun = new GameObject(GrafLib)
         GrafLib.Util.Vector2(25, -10),
         GrafLib.Util.Vector2(-25, -10)
     ])
-    .setPosition(GrafLib.Util.Vector2(514, 250))
-    .setRotation(Math.PI / 4) // Rotated 45 degrees
+    .setPosition(GrafLib.Util.Vector2(-14, 250))
+    .setRotation(Math.PI / 4)
     .setColor(GrafLib.Util.Color(0, 0, 0))
     .setFills([
         GrafLib.Coloring.createFillInfo("BF", [GrafLib.Util.Color(0, 0, 255), GrafLib.Util.Color(0, 0, 0)], GrafLib.Util.Vector2(0, 0))
