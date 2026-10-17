@@ -36,7 +36,7 @@ engine.addObject(gun, 1);
 
 engine.start();
 
-canvas_handler.addEventListener('mousemove', function(e) {
+function rotasi_fp(e) {
     let mouseX = e.offsetX;
     let mouseY = e.offsetY;
 
@@ -45,16 +45,50 @@ canvas_handler.addEventListener('mousemove', function(e) {
     angle = Math.atan2(gun_anchor.y - mouseY, gun_anchor.x - mouseX) + Math.PI - (2 * Math.PI);
 
     gun.updateRotation(angle);
-});
+}
 
-canvas_handler.addEventListener('click', function() {
-    angles.push(angle);
+function ricochet(obj, delta) {
+    const collision = obj.getCollision()
+    const collided = obj.checkCollision(collision);
+    if (collided) {
+        let vx = obj.velocity.x;
+        let vy = obj.velocity.y;
+        
+        if (collision.right || collision.left) {
+            vx *= -1;
+        }
 
+        if (collision.top || collision.bottom) {
+            vy *= -1;
+        }
+
+        if (obj.custom_attributes.ricochet_count < 2) {
+            obj.setVelocity(GrafLib.Util.Vector2(vx, vy));
+            obj.custom_attributes.ricochet_count += 1;
+        } else {
+            if (obj.custom_attributes.accumulated == 0) {
+                obj.setVelocity(GrafLib.Util.Vector2(vx * 0.3, vy * 0.3));
+                obj.custom_attributes.ricochet_count += 1;
+                obj.custom_attributes.accumulated += delta;
+            }
+        }
+    }
+
+    if (obj.custom_attributes.ricochet_count > 2) {
+        if (obj.custom_attributes.accumulated > 0.1) {
+            obj.destroy();
+        }
+
+        obj.custom_attributes.accumulated += delta;
+    }
+}
+
+function tembak(e) {
     let x = gun.position.x + 25 * Math.cos(angle);
     let y = gun.position.y + 25 * Math.sin(angle);
 
-    let vx = 10 * Math.cos(angle);
-    let vy = 10 * Math.sin(angle);
+    let vx = 250 * Math.cos(angle);
+    let vy = 250 * Math.sin(angle);
 
     const bullet = new GameObject(GrafLib)
         .setName("bullet")
@@ -67,7 +101,14 @@ canvas_handler.addEventListener('click', function() {
         .setVelocity(GrafLib.Util.Vector2(vx, vy))
         .setFills([
             GrafLib.Coloring.createFillInfo("BF", [GrafLib.Util.Color(255, 0, 0), GrafLib.Util.Color(255, 0, 0)], GrafLib.Util.Vector2(0, 0))
-        ]);
+        ])
+        .addAttribute("ricochet_count", 0)
+        .addAttribute("accumulated", 0)
+        .bindToUpdate(ricochet);
 
-    engine.addObject(bullet)
-});
+    engine.addDebris(bullet, 0, 10);
+}
+
+canvas_handler.addEventListener('mousemove', rotasi_fp);
+
+canvas_handler.addEventListener('click', tembak);
