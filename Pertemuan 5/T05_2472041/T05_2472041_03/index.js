@@ -1,8 +1,8 @@
 // 2472041 - Rico Dharmawan
 
-import { PhysicsEngine } from "../../../lib/engine/physicsEngine.js";
-import { graphicsLib } from "../../../lib/graphics/graphicsLib.js";
-import { GameObject } from "../../../lib/engine/object.js";
+import { PhysicsEngine } from "../lib/engine/physicsEngine.js";
+import { graphicsLib } from "../lib/graphics/graphicsLib.js";
+import { GameObject } from "../lib/engine/object.js";
 
 let canvas_handler = document.querySelector("#mycanvas");
 let context = canvas_handler.getContext("2d", { willReadFrequently: true });
