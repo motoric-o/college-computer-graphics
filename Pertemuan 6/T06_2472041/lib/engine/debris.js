@@ -1,5 +1,3 @@
-// 2472041 - Rico Dharmawan
-
 export default class Debris {
     constructor() {
         this.stack = [];
@@ -19,7 +17,6 @@ export default class Debris {
             if (debris.accumulated >= debris.timeout) {
                 this.stack[i].object.destroy();
                 this.stack.splice(i, 1);
-                i--;
             } else {
                 debris.accumulated += delta;
             }

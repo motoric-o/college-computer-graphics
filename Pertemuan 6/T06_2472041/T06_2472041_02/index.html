@@ -25,10 +25,8 @@
             text-align: center;
         }
 
-        #clear {
-            width: 70px;
-            height: 40px;
-            margin: 20px auto;
+        #input {
+            margin-top: 900px;
         }
 
         body {
@@ -39,9 +37,13 @@
 </head>
 
 <body>
-    <div class="centered">
-        <canvas height="500" width="500" id="mycanvas" class="canvas">
-        </canvas>
+    <div class="centered" id="canvasDiv"></div>
+    <div class="centered" id="input">
+        <div>
+            <button id="mulai">Mulai</button>
+            <button id="stop">Stop</button>
+            <button id="restart">Restart</button>
+        </div>
     </div>
 
     <script type="module" src="index.js"></script>

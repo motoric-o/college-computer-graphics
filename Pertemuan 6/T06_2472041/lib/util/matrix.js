@@ -1,5 +1,3 @@
-// 2472041 - Rico Dharmawan
-
 export default class MatrixClass {
     constructor() {
 

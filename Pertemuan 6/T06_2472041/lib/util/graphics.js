@@ -1,5 +1,3 @@
-// 2472041 - Rico Dharmawan
-
 import * as primitive from "../graphics/primitive/index.js";
 
 export function createFillInfo(fillType, colors, coordinate) {

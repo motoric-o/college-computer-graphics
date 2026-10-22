@@ -1,6 +1,3 @@
-// 2472041 - Rico Dharmawan
-
-import GraphicsLib from "../graphics/graphicsLib.js";
 import Debris from "./debris.js";
 import Layer from "./layer.js";
 import PhysicsEngine from "./physicsEngine.js";
@@ -10,43 +7,41 @@ export default class GameEngine {
         this.height = height;
         this.width = width;
         this.mainCanvas = null;
-        this.Layer = new Layer();
+        this.Layer = new Layer(layer_count, width, height);
         this.Debris = new Debris();
-        
-        this.physics = new PhysicsEngine(tickRate, [], this.Layer, this.Debris)
-
-        for (let i = 0; i < layer_count; i++) {
-            const canvas = document.createElement("canvas");
-            canvas.height = this.height;
-            canvas.width = this.width;
-            canvas.className = "canvas";
-            canvas.id = `layer-${i}`;
-
-            document.body.querySelector('.centered').appendChild(canvas)
-            const ctx = canvas.getContext("2d", { willReadFrequently: true })
-            this.physics.addGraphics(new GraphicsLib(ctx, canvas));
-        }
-
+        this.physics = new PhysicsEngine(tickRate, this.Layer, this.Debris)
         this.mainCanvas = document.querySelector(`#layer-${this.Layer.getStack().length-1}`)
     }
 
-    addDebris(obj, layer = 0, timeout) {
-        this.addObject(obj, layer);
+    addDebris(obj, timeout) {
+        this.addObject(obj);
         this.Debris.addObject(obj, timeout);
     }
 
-    addObject(obj, layer = 0) {
-        this.physics.objects.push(obj);
-        this.Layer.addObject(obj, layer);
-        obj.setId(layer, this.Layer.getLayerObjectCount(layer));
-        obj.setGraphics(this.physics.graphics[layer]);
+    addChild(children) {
+        for (let child of children) {
+            child.setGraphics(this.Layer.graphics[child.layer]);
+            this.Layer.addObject(child);
+            if (child.children) {
+                this.addChild(child.children);
+            }
+        }
     }
 
-    addStaticObject(obj, layer) {
+    addObject(obj) {
+        this.physics.objects.push(obj);
+        const layer = obj.layer;
         this.Layer.addObject(obj, layer);
-        obj.setId(layer);
-        obj.setId(layer, this.Layer.getLayerObjectCount(layer));
-        obj.setGraphics(this.physics.graphics[layer]);
+        obj.setGraphics(this.Layer.graphics[layer]);
+        if (obj.children) {
+            this.addChild(obj.children)
+        }
+    }
+
+    addStaticObject(obj) {
+        this.Layer.addObject(obj);
+        const layer = obj.layer;
+        obj.setGraphics(this.Layer.graphics[layer]);
     }
     
     start() {
