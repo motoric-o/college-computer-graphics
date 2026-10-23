@@ -1,4 +1,4 @@
-// 2472041 - Rico Dharmawan
+// Rico Dharmawan - 2472041
 import { Color, Vector2 } from "../lib/graphics/primitive/index.js";
 import { toRad } from "../lib/util/math.js";
 import MatrixClass from "../lib/util/matrix.js";

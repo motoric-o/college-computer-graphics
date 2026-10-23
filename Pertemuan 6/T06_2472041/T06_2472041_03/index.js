@@ -1,4 +1,4 @@
-// 2472041 - Rico Dharmawan
+// Rico Dharmawan - 2472041
 import GameObject from "../lib/engine/object.js";
 import GameEngine from "../lib/engine/GameEngine.js";
 import { Color, Vector2 } from "../lib/graphics/primitive/index.js";

@@ -1,3 +1,5 @@
+// Rico Dharmawan - 2472041
+
 export default class PhysicsEngine {
     constructor(tickRate = 1 / 60, layer, debris) {
         this.isRunning = false;

@@ -1,3 +1,5 @@
+// Rico Dharmawan - 2472041
+
 import { Color, Vector2 } from "../graphics/primitive/index.js";
 import { createFillInfo } from "../util/graphics.js";
 import { clamp } from "../util/math.js"

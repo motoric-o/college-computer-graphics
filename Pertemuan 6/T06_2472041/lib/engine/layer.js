@@ -1,3 +1,5 @@
+// Rico Dharmawan - 2472041
+
 import GraphicsLib from "../graphics/graphicsLib.js";
 
 export default class Layer {

@@ -1,3 +1,5 @@
+// Rico Dharmawan - 2472041
+
 import * as primitive from "../graphics/primitive/index.js";
 
 export function createFillInfo(fillType, colors, coordinate) {

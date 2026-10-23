@@ -1,3 +1,5 @@
+// Rico Dharmawan - 2472041
+
 export default class Debris {
     constructor() {
         this.stack = [];
