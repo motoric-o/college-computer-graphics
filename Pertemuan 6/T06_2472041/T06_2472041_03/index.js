@@ -33,7 +33,9 @@ function wave(self, delta, time) {
 
 function raft_rotate(self, delta, time) {
     let rot = Math.atan(0.25 * Math.cos(waveCount * 300 - 2 * time));
+    let upDown = 0.5 * Math.cos(waveCount * self.position.x - 2 * time) + self.position.y;
     self.rotation = rot;
+    self.position = Vector2(self.position.x, upDown)
 }
 
 const ocean = new GameObject()
