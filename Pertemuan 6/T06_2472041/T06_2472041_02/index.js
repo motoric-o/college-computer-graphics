@@ -60,8 +60,8 @@ const window = new GameObject()
     .setFills([createFillInfo("BF", [Color(100, 150, 250), Color(0, 0, 0)], Vector2(0, 0))])
     .setLayer(1);
 
-    
-    const rearTire = new GameObject()
+
+const rearTire = new GameObject()
     .setName('rearTire')
     .setVertices(Vector2(0, 0))
     .setRadius(40)
@@ -69,8 +69,8 @@ const window = new GameObject()
     .setLocalPosition(Vector2(-85, 35))
     .setFills([createFillInfo("BF", [Color(150, 150, 150), Color(0, 0, 0)], Vector2(0, 0))])
     .setLayer(2);
-    
-    const frontTire = new GameObject()
+
+const frontTire = new GameObject()
     .setName('frontTire')
     .setVertices(Vector2(0, 0))
     .setRadius(40)
@@ -78,8 +78,8 @@ const window = new GameObject()
     .setLocalPosition(Vector2(85, 35))
     .setFills([createFillInfo("BF", [Color(150, 150, 150), Color(0, 0, 0)], Vector2(0, 0))])
     .setLayer(2);
-    
-    const rearRim = new GameObject()
+
+const rearRim = new GameObject()
     .setName('rearRim')
     .setVertices([
         Vector2(0, 0),
@@ -92,8 +92,8 @@ const window = new GameObject()
     .setColor(Color(0, 0, 0))
     .setLayer(3)
     .setLocalPosition(Vector2(0, 0));
-    
-    const frontRim = new GameObject()
+
+const frontRim = new GameObject()
     .setName('frontRim')
     .setVertices([
         Vector2(0, 0),
@@ -106,7 +106,7 @@ const window = new GameObject()
     .setColor(Color(0, 0, 0))
     .setLayer(3)
     .setLocalPosition(Vector2(0, 0));
-    
+
 
 carBody.addChild(window)
 rearTire.addChild(rearRim);
@@ -114,23 +114,23 @@ frontTire.addChild(frontRim);
 
 carBody.addChild(rearTire);
 carBody.addChild(frontTire);
-    
+
 engine.addStaticObject(road);
 engine.addObject(carBody);
 
-mulai.addEventListener("click", function(e) {
-    carBody.setVelocity(Vector2(100, 0));
+mulai.addEventListener("click", function (e) {
     rearTire.setAngVelocity(5);
     frontTire.setAngVelocity(5);
+    carBody.setVelocity(Vector2(rearTire.angVelocity * rearTire.radius, 0));
 });
 
-stop.addEventListener("click", function(e) {
+stop.addEventListener("click", function (e) {
     carBody.setVelocity(Vector2(0, 0));
     rearTire.setAngVelocity(0);
     frontTire.setAngVelocity(0);
 });
 
-restart.addEventListener("click", function(e) {
+restart.addEventListener("click", function (e) {
     carBody.setPosition(Vector2(200, 525));
     carBody.setVelocity(Vector2(0, 0))
     rearTire.setAngVelocity(0);
