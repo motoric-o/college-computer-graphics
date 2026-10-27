@@ -30,7 +30,6 @@ document.querySelector("#processButton").addEventListener("click", async (e) => 
     let eyes = new cv.RectVector();
     let faceCascade = new cv.CascadeClassifier();
     let eyeCascade = new cv.CascadeClassifier();
-    let faceTextPoint = new cv.Point(0, 0);
     
     faceCascade.load('haarcascade_frontalface_default.xml');
     eyeCascade.load('haarcascade_eye.xml');
@@ -41,12 +40,11 @@ document.querySelector("#processButton").addEventListener("click", async (e) => 
         let roiGray = gray.roi(faces.get(i));
         let roiSrc = src.roi(faces.get(i));
         let point1 = new cv.Point(faces.get(i).x, faces.get(i).y);
-        faceTextPoint = point1;
         let point2 = new cv.Point(faces.get(i).x + faces.get(i).width,
             faces.get(i).y + faces.get(i).height);
         cv.rectangle(src, point1, point2, [0, 0, 255, 255], 2);
         
-        eyeCascade.detectMultiScale(roiGray, eyes, 1.1, 5, (30, 30));
+        eyeCascade.detectMultiScale(roiGray, eyes);
         for (let j = 0; j < eyes.size(); ++j) {
             let point1 = new cv.Point(eyes.get(j).x, eyes.get(j).y);
             let point2 = new cv.Point(eyes.get(j).x + eyes.get(j).width,
@@ -54,13 +52,14 @@ document.querySelector("#processButton").addEventListener("click", async (e) => 
             cv.rectangle(roiSrc, point1, point2, [0, 255, 0, 255], 2);
         }
         roiGray.delete(); roiSrc.delete();
+
+        if (eyes.size() > 1) {
+            cv.putText(src, 'Mata Terbuka', point1, cv.FONT_HERSHEY_SIMPLEX, 0.8, [0, 255, 0, 255], 2);
+        } else {
+            cv.putText(src, 'Mata Tertutup', point1, cv.FONT_HERSHEY_SIMPLEX, 0.8, [255, 0, 0, 255], 2);
+        }
     }
     
-    if (eyes.size() > 0) {
-        cv.putText(src, 'Mata Terbuka', faceTextPoint, cv.FONT_HERSHEY_SIMPLEX, 0.8, [0, 255, 0, 255], 2);
-    } else {
-        cv.putText(src, 'Mata Tertutup', faceTextPoint, cv.FONT_HERSHEY_SIMPLEX, 0.8, [255, 0, 0, 255], 2);
-    }
 
 
     cv.imshow('outputCanvas', src);
