@@ -1,0 +1,73 @@
+<!-- Rico Dharmawan - 2472041 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TXX_2472041_XX</title>
+    <style>
+        #canvasInput {
+            width: 500px;
+            height: 500px;
+            object-fit: contain;
+            border: 1px solid black;
+            min-width: 500px;
+        }
+
+        .caption {
+            text-align: center;
+        }
+
+        .inputoutput {
+            width: 80%;
+            margin: 0 auto;
+            border: 1px solid black;
+        }
+
+        #imageList {
+            margin: 10px;
+            display: flex;
+            justify-content: space-around;
+            gap: 10px;
+        }
+
+        #imageSrc {
+            width: 100%;
+            border: 1px solid black;
+        }
+
+        #outputCanvas {
+            width: 500px;
+            height: 500px;
+            object-fit: contain;
+            border: 1px solid black;
+            min-width: 500px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="inputoutput">
+            <h2>Hello OpenCV.js</h2>
+            <div id="imageList">
+                <img id="canvasInput" src="" alt="No Image">
+                <canvas id="outputCanvas"></canvas>
+            </div>
+            <div class="caption">
+                <input type="file" id="fileInput" name="file" />
+                <input type="button" value="process" id="processButton" />
+            </div>
+        </div>
+    </div>
+
+    <script src="opencv.js"></script>
+    <script type="module" src="index.js"></script>
+</body>
+
+</html>

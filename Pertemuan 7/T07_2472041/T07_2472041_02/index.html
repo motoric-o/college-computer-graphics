@@ -1,0 +1,69 @@
+<!-- Rico Dharmawan - 2472041 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T07_2472041_02</title>
+    <style>
+        #canvasInput {
+            object-fit: contain;
+            border: 1px solid black;
+            min-width: 500px;
+        }
+
+        .caption {
+            text-align: center;
+        }
+
+        .inputoutput {
+            width: 80%;
+            margin: 0 auto;
+            border: 1px solid black;
+        }
+
+        #imageList {
+            margin: 10px;
+            display: flex;
+            justify-content: space-around;
+            gap: 10px;
+        }
+
+        #imageSrc {
+            width: 100%;
+            border: 1px solid black;
+        }
+
+        #outputCanvas {
+            object-fit: contain;
+            border: 1px solid black;
+            min-width: 500px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="inputoutput">
+            <h2>Deteksi Mata Terbuka / Tertutup</h2>
+            <div id="imageList">
+                <img id="canvasInput" src="img2.jpg" alt="No Image">
+                <canvas id="outputCanvas"></canvas>
+            </div>
+            <div class="caption">
+                <input type="file" id="fileInput" name="file" />
+                <input type="button" value="process" id="processButton" />
+            </div>
+        </div>
+    </div>
+
+    <script src="https://docs.opencv.org/4.13.0/opencv.js"></script>
+    <script type="module" src="index.js"></script>
+</body>
+
+</html>
