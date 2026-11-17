@@ -1,3 +1,5 @@
+// Rico Dharmawan - 2472041
+
 import * as THREE from "three";
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
@@ -91,6 +93,16 @@ const material = new THREE.MeshStandardMaterial({
     metalness: 0.1,
 });
 
+const wireframeGeo = new THREE.WireframeGeometry(geometry);
+const wireframeMat = new THREE.LineBasicMaterial({
+    color: 0xffffff,
+    transparent: true,
+    opacity: 0.7,
+});
+const wireframe1 = new THREE.LineSegments(wireframeGeo, wireframeMat);
+const wireframe2 = new THREE.LineSegments(wireframeGeo, wireframeMat);
+wireframe2.rotation.z = Math.PI;
+
 // USER
 const mesh = new THREE.Mesh(geometry, material);
 
@@ -100,6 +112,8 @@ mesh2.rotation.z = Math.PI;
 const crystal = new THREE.Group();
 crystal.add(mesh);
 crystal.add(mesh2);
+crystal.add(wireframe1);
+crystal.add(wireframe2);
 
 scene.add(crystal);
 
