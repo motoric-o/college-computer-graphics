@@ -1,0 +1,26 @@
+{
+  "name": "college-computer-graphics",
+  "version": "1.0.0",
+  "description": "3D Javascript",
+  "homepage": "https://github.com/motoric-o/college-computer-graphics#readme",
+  "bugs": {
+    "url": "https://github.com/motoric-o/college-computer-graphics/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/motoric-o/college-computer-graphics.git"
+  },
+  "license": "ISC",
+  "author": "Rico Dharmawan",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "three": "^0.187.0"
+  },
+  "devDependencies": {
+    "vite": "^8.3.8"
+  }
+}
