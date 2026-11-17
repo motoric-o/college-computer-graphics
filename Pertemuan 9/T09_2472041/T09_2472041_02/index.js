@@ -66,7 +66,7 @@ const vertices = new Float32Array([
 const geometry = new THREE.BufferGeometry();
 geometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
 
-// AIGEN - 
+// AIGEN - I'm making a crystal mesh and I want to color it like this, how do I achieve this?
 const count = geometry.attributes.position.count;
 const colors = new Float32Array(count * 3);
 const pos = geometry.attributes.position;
